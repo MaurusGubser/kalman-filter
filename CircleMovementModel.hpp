@@ -2,8 +2,6 @@
 
 #include <array>
 #include <iostream>
-//#include <KalmanFilter.hpp>
-
 
 class CircleMovement
 {
