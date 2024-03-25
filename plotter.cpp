@@ -1,22 +1,37 @@
-#include "CircleMovementModel.hpp"
-#include <random>
-#include <cmath>
-#include <fstream>
 #include <iostream>
-// #include "gnuplot-iostream.h"
+#include <fstream>
+#include <cmath>
+#include <random>
+#include <array>
 
-CircleMovement::CircleMovement()
-    : theta{0.0}, x{0.0}, y{0.0}
+class CircleMovement
+{
+private:
+    float theta;
+    float x;
+    float y;
+
+public:
+    CircleMovement();
+    CircleMovement(float theta);
+    CircleMovement(float x, float y);
+    float get_angle();
+    std::array<float, 2> get_position();
+    float observe_distance(float dist_observer_to_origin);
+    void make_n_steps(int n);
+    void print_position();
+    void print_observation(float d_obs_to_origin);
+};
+
+CircleMovement::CircleMovement() : theta{0.0}, x{0.0}, y{0.0}
 {
 }
 
-CircleMovement::CircleMovement(float theta)
-    : theta{theta}, x{std::cos(theta)}, y{std::sin(theta)}
+CircleMovement::CircleMovement(float theta) : theta{theta}, x{std::cos(theta)}, y{std::sin(theta)}
 {
 }
 
-CircleMovement::CircleMovement(float x, float y)
-    : theta{std::atan2(y, x)}, x{x}, y{x}
+CircleMovement::CircleMovement(float x, float y) : theta{std::atan2(y, x)}, x{x}, y{x}
 {
 }
 
@@ -62,7 +77,6 @@ void CircleMovement::print_observation(float d_obs_to_origin)
 {
     std::cout << "Observed distance=" << this->observe_distance(d_obs_to_origin) << std::endl;
 }
-
 
 int main()
 {
